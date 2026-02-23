@@ -1,0 +1,4 @@
+networkx<3.4
+pandas<4.0
+bidict<1.0
+psutil<7.0
