@@ -1,7 +1,8 @@
+from pathlib import Path
+
 __author__ = "amane"
 
 import logging
-import os
 
 import pandas as pd
 from bidict import bidict
@@ -61,18 +62,19 @@ def comp_mode(
     p,
     min_len,
     max_calls,
-    output_file,
-    log_file,
+    output_file: Path,
+    log_file: Path,
 ):
-    """
-    Reads input files
-    Initializes plasmid dicts and stores plasmid bins for both sides
-    Calls compare_sets function to compute dissimilarity between the two sides
+    """Compute "comp" evaluation mode.
+
+    * Reads input files
+    * Initializes plasmid dicts and stores plasmid bins for both sides
+    * Calls compare_sets function to compute dissimilarity between the two sides
     """
     for in_file in [left_plasmids_file, right_plasmids_file]:
         check_file(in_file)
-    output_dir = os.path.dirname(output_file)
-    log_dir = os.path.dirname(log_file)
+    output_dir = output_file.parent
+    log_dir = log_file.parent
     create_directory([output_dir, log_dir])
     results_file = open(output_file, "w")
     # Initialize logging
